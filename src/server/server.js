@@ -26,7 +26,7 @@ const PORT = 5000;
 
 app.use(
   cors({
-    origin: "coco-closet-wqly.vercel.app",
+   origin: "https://coco-closet-wqly.vercel.app",
     credentials: true,
   })
 );
