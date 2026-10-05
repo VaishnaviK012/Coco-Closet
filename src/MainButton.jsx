@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function MainButton() {
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5000";
+const API_URL = "https://coco-closet.onrender.com";
 
   const [isSignup, setIsSignup] = useState(false);
 
