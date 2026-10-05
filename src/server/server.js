@@ -25,10 +25,13 @@ const PORT = 5000;
 // ===============================
 
 app.use(
-  cors({
-   origin: "https://coco-closet-wqly.vercel.app",
-    credentials: true,
-  })
+ cors({
+  origin: [
+    "https://coco-closet-wqly.vercel.app",
+    "https://coco-closet-wqly-fbhsq5w2v-vaishnavik1286-8010s-projects.vercel.app",
+  ],
+  credentials: true,
+})
 );
 
 // ===============================
