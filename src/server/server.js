@@ -1,4 +1,3 @@
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -10,9 +9,7 @@ import User from "./models/User.js";
 import Product from "./models/Product.js";
 import Cart from "./models/Cart.js";
 import cartroutes from "./routes/cart.js";
-// import cartItemRoutes from "./routes/cartItemRoutes.js";
 import billingItemRoutes from "./routes/billingItemRoutes.js";
-// import cartItemRoutes from "./routes/cartitem.js";
 import cartItemRoutes from "./routes/cartItemRoutes.js";
 
 dotenv.config();
@@ -25,21 +22,24 @@ const PORT = 5000;
 // ===============================
 
 app.use(
- cors({
-  origin: [
-    "https://coco-closet-wqly.vercel.app",
-    "https://coco-closet-wqly-fbhsq5w2v-vaishnavik1286-8010s-projects.vercel.app",
-  ],
-  credentials: true,
-})
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || origin.endsWith(".vercel.app")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
 
 // ===============================
 // JSON
 // ===============================
 
-
 app.use(express.json());
+
 app.use("/api/cartitem", cartItemRoutes);
 app.use("/api/cart", cartroutes);
 app.use("/api/billingitem", billingItemRoutes);
@@ -252,11 +252,6 @@ app.post("/api/login", async (req, res) => {
 });
 
 // ===============================
-// ADD TO CART
-// ===============================
-
-
-// ===============================
 // 404
 // ===============================
 
@@ -271,8 +266,5 @@ app.use((req, res) => {
 // ===============================
 
 app.listen(PORT, () => {
-  console.log(
-    `Server running on http://localhost:${PORT}`
-  );
+  console.log(`Server running on http://localhost:${PORT}`);
 });
-
